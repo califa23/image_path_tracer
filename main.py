@@ -5,8 +5,8 @@ import json
 
 edges = paths.edges
 
+PRECISION = 10 # ADJUST AS NEEDED
 
-PRECISION = 10
 count = 0
 edge = edges[count]
 mouse_pressed = False
@@ -44,17 +44,17 @@ def mouse_up(event):
     count += 1
     if count < len(edges):
         edge = edges[count]
-        print(edge)
+        print(str(count) + "/" + str(len(edges)) + ": " + edge)
     else:
         print("All edges are done.")
 
-print(edge)
+print(str(count) + "/" + str(len(edges)) + ": "+ edge)
 # Create the main application window
 root = tk.Tk()
 root.title("Cursor Location on Image")
 
 # Load the image and convert it to a Tkinter PhotoImage
-pil_image = Image.open('Lekagul Roadways labeled v2.jpg')
+pil_image = Image.open("Lekagul Roadways labeled v2.jpg")
 image = ImageTk.PhotoImage(pil_image)
 
 # Create a canvas to display the image
@@ -76,9 +76,9 @@ root.mainloop()
 # for item in all_paths:
 #     print(item, all_paths[item])
 
-output_file = "collected_paths.json"
+output_file = "precision" + str(PRECISION )+ "paths.json"
 # Serialize and save the data as JSON
 with open(output_file, "w") as json_file:
     json.dump(all_paths, json_file)
 
-print('json file saved as: ', output_file)
+print("json file saved as: ", output_file)
