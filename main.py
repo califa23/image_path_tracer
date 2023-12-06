@@ -1,13 +1,12 @@
 from PIL import Image, ImageTk
 import tkinter as tk
 import paths
-import json
 
 edges = paths.edges
 
 PRECISION = 10 # ADJUST AS NEEDED
 
-count = 0
+count = 114
 edge = edges[count]
 mouse_pressed = False
 prev_x, prev_y = None, None
@@ -76,9 +75,11 @@ root.mainloop()
 # for item in all_paths:
 #     print(item, all_paths[item])
 
-output_file = "precision" + str(PRECISION )+ "paths.json"
-# Serialize and save the data as JSON
-with open(output_file, "w") as json_file:
-    json.dump(all_paths, json_file)
+output_file = "precision" + str(PRECISION )+ "paths.js"
+js_code = "const pathCoordinates = " + str(all_paths) + ";\nexport default pathCoordinates;"
 
-print("json file saved as: ", output_file)
+# Write to the JavaScript file
+with open(output_file, "w") as js_file:
+    js_file.write(js_code)
+
+print("js file saved as: ", output_file)
